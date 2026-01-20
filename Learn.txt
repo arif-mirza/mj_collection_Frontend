@@ -1,0 +1,59 @@
+ => create project and install all the dependencies
+ => create the folder structure
+ => create the UI with bootstrap
+ => first of all we display all products thorugh API
+   => useEffect ka use kar k hamne API ko call karna hy 
+   => map method k through data map karna hy UI method
+   => buttons create kiye aur inko NavLink me wrap kiya 
+   => setLoading thorugh npm loading Skeleton package
+=> create the delete and update buttons
+=> then we need to call some actions on delete and update 
+=> we create Store for this
+=> store banane ka method 
+  => first of all we create a store folder 
+  => create stote.js file in which we use configure store and then write the reducers
+  => mention the provider in the main.js file and wrap the app component in this and give store as a props
+  => create slices for this.
+  => in the slices we define the reducers which are basically features of the application in out case addproduct and deleteproduct and updateproduct etc.
+=> in the products.jsx file we use useSelector for get the data from store 
+=> also use useDispatch when we call a action
+
+---------------------------------------------------------------------------------------
+Question : how product add in the products list?
+Answer   : here is the code below
+       addProduct: (state, action) => {
+      state.products = [action.payload, ...state.products];
+    },
+  => state is the initial value and all the data is will save in the action
+  => state.products equal to the data which are in acion and also we use spread operator for add the existing data.
+
+
+
+  Question : how product is delete in the product list ?
+  Answer   :  here is the code below : 
+
+           const id = action.payload; 
+          deleteProduct : (state, action) => {
+            state.product = state.product.filter((item) => item.id !== id);
+          }
+
+  => in this code we can retrive ID from the action.payload
+  => we can overwrite the data of state.product and filter the product and want to return thoes product which is not match .
+
+
+  Question : how product is update or edit in product list ?
+  Answer   : here is the code below : 
+
+  updateProduct: (state, action) => {
+      const index = state.products.findIndex(
+        (product) => product.id === action.payload.id
+      );
+      if (index !== -1) {
+        state.products[index] = action.payload; // Update product
+      }
+    },
+
+    => first of all we find which product we want to update 
+    => use the findIndex method to find the index of the specific product
+    => then we update the product through the index which is equal to action.payload;
+    
