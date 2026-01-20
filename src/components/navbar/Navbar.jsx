@@ -2,7 +2,7 @@ import "../navbar/navbar.css";
 import { NavLink } from "react-router-dom";
 import Login from "../../Auth/login/Login";
 import Register from "../../Auth/Register/Register";
-import logo from "../../assets/images/mj-collection(2).JPEG";
+import logo from "../../assets/images/mj-collection.jpeg";
 import { getToken, removeToken, getCartCount, getUser } from "../../utils/api";
 import { useNavigate } from "react-router-dom";
 
