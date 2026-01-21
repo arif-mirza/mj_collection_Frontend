@@ -18,6 +18,7 @@ const OrderPlace = () => {
 
   const [paymentId, setPaymentId] = useState("");
   const [loadingId, setLoadingId] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const generatePaymentId = () => {
     setLoadingId(true);
@@ -28,6 +29,7 @@ const OrderPlace = () => {
   };
 
   const handleSubmit = async (e) => {
+    setLoading(true);
     e.preventDefault();
 
     await orderAPI.placeOrder({
@@ -40,6 +42,8 @@ const OrderPlace = () => {
       paymentId,
       transactionId: form.transactionId,
     });
+   
+
 
     toast.success("Order placed successfully!");
     navigate("/products");
@@ -87,7 +91,13 @@ const OrderPlace = () => {
           </>
         )}
 
-        <button className="btn btn-dark w-100 mt-3">Place Order</button>
+        <button className="btn btn-dark w-100 mt-3"
+        disabled={loading}
+        
+        
+        >
+          {loading ? "Plesae wait...." : "Place Order"}
+        </button>
       </form>
     </div>
   );

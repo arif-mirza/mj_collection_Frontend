@@ -2,31 +2,25 @@ import { useState } from "react";
 import "../login/loginStyle.css";
 import Register from "../Register/Register";
 import { saveUser } from "../../utils/api";
-
-/* 🔧 CHANGED HERE */
 import { authAPI, saveToken } from "../../utils/api";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  // add bootstrap instance
+  const bootstrap= window.bootstrap;
 
-  /* 🔧 CHANGED HERE */
-  const navigate = useNavigate();
 
-  // const handleSignUp = () => {
-  //   const loginModal = document.getElementById("loginModal");
-  //   const registerModal = document.getElementById("registerModel");
 
-  //   if (typeof bootstrap !== "undefined") {
-  //     bootstrap.Modal.getInstance(loginModal)?.hide();
-  //     new bootstrap.Modal(registerModal).show();
-  //   }
-  // };
+  
 
-  /* 🔧 CHANGED HERE: USER + ADMIN LOGIN */
+  
+ 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -41,12 +35,6 @@ function Login() {
 
       saveToken(response.token);
       saveUser(response.user);
-
-        if (response.user.role === "admin") {
-    navigate("/admin-dashboard");
-  } else {
-    navigate("/products");
-  }
 
       localStorage.setItem("user", JSON.stringify(response.user));
 toast.success("Login successful");
@@ -114,7 +102,7 @@ window.location.reload();
 
               <div className="text-center mt-4">
                 <span className="text-white">
-                  Don't have an account?
+                  Don&apos;t have an account?
                 <button
   type="button"
   className="text-primary border-0 bg-transparent"

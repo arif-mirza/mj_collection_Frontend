@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { orderAPI  } from "../../utils/api";
+import { orderAPI } from "../../utils/api";
 
 const AdminDashboard = () => {
   const [orders, setOrders] = useState([]);
@@ -53,7 +53,9 @@ const AdminDashboard = () => {
         <thead>
           <tr>
             <th>Date</th>
+            <th>Customer Name</th>
             <th>Order Name</th>
+            <th>Address</th>
             <th>Phone</th>
             <th>Quantity</th>
             <th>Payment</th>
@@ -66,35 +68,41 @@ const AdminDashboard = () => {
           {filteredOrders.map((order) => (
             <tr key={order._id}>
               <td>{new Date(order.createdAt).toLocaleDateString()}</td>
-              <td>{order.productName}</td>
+              <td>{order.user?.name || "N/A"}</td>
+              <td>{order?.productName}</td>
+              <td>{order?.address}</td>
               <td>{order.phone}</td>
               <td>{order.quantity}</td>
               <td>{order.paymentMethod}</td>
               <td>${order.totalAmount}</td>
               <td>
-  {order.paymentMethod === "ONLINE" ? (
-    <>
-      <p><b>ID:</b> {order.paymentId}</p>
-      <p><b>Txn:</b> {order.transactionId}</p>
+                {order.paymentMethod === "ONLINE" ? (
+                  <>
+                    <p>
+                      <b>ID:</b> {order.paymentId}
+                    </p>
+                    <p>
+                      <b>Txn:</b> {order.transactionId}
+                    </p>
 
-      <select
-        className="form-select"
-        value={order.paymentStatus}
-        onChange={async (e) => {
-          await orderAPI.updatePayment(order._id, {
-            paymentStatus: e.target.value,
-          });
-          fetchOrders();
-        }}
-      >
-        <option value="Pending">Pending</option>
-        <option value="Confirmed">Confirmed</option>
-      </select>
-    </>
-  ) : (
-    "COD"
-  )}
-</td>
+                    <select
+                      className="form-select"
+                      value={order.paymentStatus}
+                      onChange={async (e) => {
+                        await orderAPI.updatePayment(order._id, {
+                          paymentStatus: e.target.value,
+                        });
+                        fetchOrders();
+                      }}
+                    >
+                      <option value="Pending">Pending</option>
+                      <option value="Confirmed">Confirmed</option>
+                    </select>
+                  </>
+                ) : (
+                  "COD"
+                )}
+              </td>
               <td>
                 <select
                   value={order.status}

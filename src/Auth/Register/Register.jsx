@@ -2,12 +2,14 @@ import  { useState } from 'react'
 import "../Register/register.css";
 import { authAPI, saveToken } from "../../utils/api";
 import { toast } from "react-toastify";
-
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 function Register() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const bootstrap= window.bootstrap;
 
   const handleSubmit = async (e) => {
     e.preventDefault();

@@ -3,21 +3,19 @@ import { NavLink } from "react-router-dom";
 import Login from "../../Auth/login/Login";
 import Register from "../../Auth/Register/Register";
 import logo from "../../assets/images/mj-collection.jpeg";
-import { getToken, removeToken, getCartCount, getUser } from "../../utils/api";
-import { useNavigate } from "react-router-dom";
+import { removeToken, getCartCount, getUser } from "../../utils/api";
 
 function Navbar() {
-  const token = getToken();
   const user = getUser();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  const handleLogout = () => {
-    removeToken();
-    localStorage.removeItem("user");
-    localStorage.removeItem("cart");
-    window.location.reload();
-    navigate("/");
-  };
+  // const handleLogout = () => {
+  //   removeToken();
+  //   localStorage.removeItem("user");
+  //   localStorage.removeItem("cart");
+  //   window.location.reload();
+  //   navigate("/");
+  // };
 
   return (
     <>
