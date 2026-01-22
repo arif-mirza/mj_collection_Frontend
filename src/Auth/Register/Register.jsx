@@ -3,6 +3,8 @@ import "../Register/register.css";
 import { authAPI, saveToken } from "../../utils/api";
 import { toast } from "react-toastify";
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import { saveUser } from "../../utils/api";
+
 function Register() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -28,6 +30,8 @@ function Register() {
       setLoading(true);
       const response = await authAPI.register({ name, email, password, role: "user" });
       saveToken(response.token);
+      saveUser(response.user);
+
       toast.success("Registration successful!");
       
       // Close modal

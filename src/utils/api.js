@@ -119,13 +119,14 @@ export const orderAPI = {
   },
 
   // Place order for user
-  placeOrder: async (orderData) => {
-    return apiCall("/orders", {
-      method: "POST",
-      body: JSON.stringify(orderData),
-    });
-  },
-
+placeOrder: async (orderData) => {
+  const token = localStorage.getItem("token"); // Get token from storage
+  return apiCall("/orders", {
+    method: "POST",
+    body: JSON.stringify(orderData),
+    headers: token ? { Authorization: `Bearer ${token}` } : {},
+  });
+},
   // Get all orders for admin
   getAll: async () => {
     return apiCall("/orders");

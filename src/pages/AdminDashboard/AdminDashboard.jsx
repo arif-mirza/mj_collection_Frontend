@@ -103,7 +103,7 @@ const AdminDashboard = () => {
                   "COD"
                 )}
               </td>
-              <td>
+              <td>  
                 <select
                   value={order.status}
                   onChange={(e) =>
